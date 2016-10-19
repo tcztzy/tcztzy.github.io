@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Tcztzy Blog</title>
+  <subtitle>Discover bigger world</subtitle>
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="https://tcztzy.github.io/"/>
+  <updated>2016-10-18T14:34:39.000Z</updated>
+  <id>https://tcztzy.github.io/</id>
+  
+  <author>
+    <name>唐梓涯</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>PEP 7</title>
+    <link href="https://tcztzy.github.io/2016/10/16/pep-7/"/>
+    <id>https://tcztzy.github.io/2016/10/16/pep-7/</id>
+    <published>2016-10-16T11:41:12.000Z</published>
+    <updated>2016-10-18T14:34:39.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p>本文提供Python的C实现的C代码的编码风格。Python代码的风格参见PEP 8。</p>
+<p>注意，规则有时也会被打破。两个打破特定规则的好的理由：</p>
+<ol>
+<li>当遵循这个规则回事代码更少地可读，即使其他人依据此规则去阅读代码。</li>
+<li>未保持和周围也打破规则的代码一致（也许是历史原因）–尽管有一个机会去清理别人的烂摊子（以真正的XP格式）</li>
+</ol>
+<h1 id="C方言"><a href="#C方言" class="headerlink" title="C方言"></a>C方言</h1><ul>
+<li>Python 3.6之前使用的是ANSI/ISO标准C（1989版标准）。这意味着（以及其他许多情况）所有的申明都必须在代码块顶部（不需要再函数的顶部）。</li>
+<li>Python 3.6及之后的版本使用采用了部分C99特性的C89：<ul>
+<li>标准整形在<code>&lt;stdint.h&gt;</code>和<code>&lt;inttypes.h&gt;</code>中。我们要求定宽的整形类型。</li>
+<li><code>static inline</code>函数</li>
+<li>指定初始化器（designated initializers），对类型定义特别好。</li>
+<li>混合申明</li>
+<li>布尔值</li>
+<li>C++风格的行注释<br>未来C99的特性可能会被添加到这个列表视编译器支持而定（主要是MSVC）。</li>
+</ul>
+</li>
+<li>不要使用GCC拓展（例如，不要写没有行尾的反斜杠的多行字符串）</li>
+<li>所有的函数申明和定义必须使用完全原型（例如，指定所有参数的类型）</li>
+<li>永远不要使用C++风格的<code>//</code>一行注释</li>
+<li>在几种主要编译器（gcc，VC++，一些其他的）上没有警告</li>
+</ul>
+<h1 id="代码布局"><a href="#代码布局" class="headerlink" title="代码布局"></a>代码布局</h1><ul>
+<li>使用4个空格缩进并完全禁用tab。</li>
+<li>每行不得超过79个字符。如果这一条和前一条一起没有给你的代码足够的空间，那么你的代码就太复杂了–考虑使用子程序。</li>
+<li><p>函数定义格式：函数名在第1列，最外面的花括号在第一列，在本地变量申明之后留空行。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">int</span></span></div><div class="line"><span class="title">extra_ivars</span><span class="params">(PyTypeObject *type, PyTypeObject *base)</span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">int</span> t_size = PyType_BASICSIZE(type);</div><div class="line">    <span class="keyword">int</span> b_size = PyType_BASICSIZE(base);</div><div class="line"></div><div class="line">    assert(t_size &gt;= b_size); <span class="comment">/* type smaller than base! */</span></div><div class="line">    ...</div><div class="line">    <span class="keyword">return</span> <span class="number">1</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>代码结构：在诸如<code>if</code>，<code>for</code>等关键词和接下来的左括号直接一个空格；在括号内没有空格；大括号被强烈推荐使用但可在C允许的情况下省略，并且它们应格式化成下面所示：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> (mro != <span class="literal">NULL</span>) &#123;</div><div class="line">    ...</div><div class="line">&#125;</div><div class="line"><span class="keyword">else</span> &#123;</div><div class="line">    ...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>return语句不应有多余的括号：<br><code>return Py_None; /* correct */</code><br><code>return(Py_None); /* incorrect */</code></p>
+</li>
+<li><p>函数和宏的调用风格：<code>foo(a, b, c)</code>–在左括号之前没有空格，在括号中没有空格，在逗号前没有空格，在每个逗号后一个空格。</p>
+</li>
+<li><p>总是在赋值符号，布尔值和比较符两边加上括号，在表达式中使用了很多操作符，在最外面的（最低优先级）的两边加上空格。</p>
+</li>
+<li><p>长行换行：如果可以，在最外层表达式的逗号后折行。总是保持缩进</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">PyErr_Format(PyExc_TypeError,</div><div class="line">             <span class="string">"cannot create '%.100s' instances"</span>,</div><div class="line">             type-&gt;tp_name);</div></pre></td></tr></table></figure>
+</li>
+<li><p>当你在长表达式的二元操作符处换行，这个操作符跟在前一行的行末，例如：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> (type-&gt;tp_dictoffset != <span class="number">0</span> &amp;&amp; base-&gt;tp_dictoffset == <span class="number">0</span> &amp;&amp;</div><div class="line">    type-&gt;tp_dictoffset == b_size &amp;&amp;</div><div class="line">    (<span class="keyword">size_t</span>)t_size == b_size + <span class="keyword">sizeof</span>(PyObject *))</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>; <span class="comment">/* "Forgive" adding a __dict__ only */</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>在函数、结构定义、函数的主要片段的前后留空行。</p>
+</li>
+<li><p>注释放在它们描述的函数之前。</p>
+</li>
+<li><p>所有的函数和全局变量申明为static，除非他们是发布的接口的一部分</p>
+</li>
+<li><p>对于外部函数和变量，我们总是在“Include”文件夹中合适的头文件中声明，使用PyAPI_FUNC()宏，如：</p>
+<p><code>PyAPI_FUNC(PyObject *) PyObject_Repr(PyObject *);</code></p>
+</li>
+</ul>
+<h1 id="命名习惯"><a href="#命名习惯" class="headerlink" title="命名习惯"></a>命名习惯</h1><ul>
+<li>公共函数使用<code>Py</code>前缀；永远不要给静态函数（使用<code>Py</code>前缀）。<code>Py_</code>前缀给全局服务</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;介绍&quot;&gt;&lt;a href=&quot;#介绍&quot; class=&quot;headerlink&quot; title=&quot;介绍&quot;&gt;&lt;/a&gt;介绍&lt;/h1&gt;&lt;p&gt;本文提供Python的C实现的C代码的编码风格。Python代码的风格参见PEP 8。&lt;/p&gt;
+&lt;p&gt;注意，规则有时也会被打破。两个打破特定
+    
+    </summary>
+    
+      <category term="编程" scheme="https://tcztzy.github.io/categories/programming/"/>
+    
+    
+      <category term="python" scheme="https://tcztzy.github.io/tags/python/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Python源码学习笔记-0</title>
+    <link href="https://tcztzy.github.io/2016/10/13/python-source-code-note-0/"/>
+    <id>https://tcztzy.github.io/2016/10/13/python-source-code-note-0/</id>
+    <published>2016-10-12T16:15:35.000Z</published>
+    <updated>2016-10-16T11:28:21.000Z</updated>
+    
+    <content type="html"><![CDATA[<p><a href="http://magiccards.info/6e/en/150.html" target="_blank" rel="external"><img src="http://magiccards.info/crop/en/6e/150.jpg" alt="Python" title="artwork by Steve White"></a></p>
+<h1 id="0-前言"><a href="#0-前言" class="headerlink" title="0. 前言"></a>0. 前言</h1><p>年初的时候给自己挖了一个坑，计划要在今年过一遍Python的源码。结果这一年零零碎碎总有事情耽搁了。现在已经10月份了，再不填坑就来不及了。于是有了这个系列。</p>
+<p>说到看Python源码，陈儒的<a href="https://book.douban.com/subject/3117898/" target="_blank" rel="external">Python源码剖析</a>可谓经典了。本系列基本也是根据此书的结构的。不过此书出版已近十年（2016-10），Python版本也从2.5到了3.5。不才能力有限，姑妄言之。</p>
+<p>运行环境：Bash on Ubuntu on Windows，同样适用其他于UNIX-like环境。</p>
+<h1 id="1-获取Python源码"><a href="#1-获取Python源码" class="headerlink" title="1. 获取Python源码"></a>1. 获取Python源码</h1><p>  你可以选择<a href="https://www.python.org/ftp/python/2.7.12/Python-2.7.12.tar.xz" target="_blank" rel="external">2.7.12</a>或 <a href="https://www.python.org/ftp/python/3.5.2/Python-3.5.2.tar.xz" target="_blank" rel="external">3.5.2</a>。当然你也可以使用<code>hg clone https://hg.python.org/cpython</code>和<code>hg update 3.5</code>这样的命令来选择你喜欢的版本分支。（hg通过sudo apt install mercurial安装）</p>
+<p>  值得注意的是，CPython会检测到是否是从工作拷贝（由hg clone的）运行。这意味着如果你在你的拷贝中编辑CPython源码，Python代码（.py文件）的改变会被解释器立即使用和测试。（如果你修改的是C代码，你将需要重新编译受影响的文件）。</p>
+<h1 id="2-编译为调试模式"><a href="#2-编译为调试模式" class="headerlink" title="2. 编译为调试模式"></a>2. 编译为调试模式</h1><p>  CPython提供几种编译flag帮助调试很多东西。所有已知的flag都可以在<code>Misc/SpecialBuilds.txt</code>文件中找到，最常用的是<code>Py_DEBUG</code>标志。<br>  <div class="alert info no-icon"><p>暂时还不清楚SpecialBuilds中的编译选项的具体用法，搞明白之后再更新。</p>
+</div></p>
+<p>  构建debug版的Python，可以在源码根目录中运行<code>./configure --with-debug</code><br>  <div class="alert info no-icon"><p>Python源码剖析中有提到<code>--enable-shared</code>，如果你不知道是干什么的建议不要加上，不然会链接到系统自带的Python的。</p>
+</div></p>
+<h2 id="2-1-构建依赖"><a href="#2-1-构建依赖" class="headerlink" title="2.1. 构建依赖"></a>2.1. 构建依赖</h2><p>  CPython的核心解释器需要C编译器构建。一些拓展模块也依赖额外的库。<br>  Debian/Ubuntu系的可执行如下命令安装依赖：<br>  <code>sudo apt-get install -y make build-essential libssl-dev zlib1g-dev libbz2-dev \
+libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev libncursesw5-dev xz-utils</code></p>
+<p>  Mac OS X:<br>  <code>brew install readline xz</code><br>  其他发行版本参见参考资料[2]。</p>
+<h1 id="3-目录结构"><a href="#3-目录结构" class="headerlink" title="3. 目录结构"></a>3. 目录结构</h1><p>大部分的子文件夹都有自己的README。大部分的文件都有注释。</p>
+<table>
+<thead>
+<tr>
+<th>文件或文件夹</th>
+<th>简介</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Demo/</td>
+<td>示例脚本，模块和程序</td>
+</tr>
+<tr>
+<td>Doc/</td>
+<td>文档源(reStructuredText)</td>
+</tr>
+<tr>
+<td>Grammar/</td>
+<td>Python的<abbr title="Extended Backus-Naur Form">EBNF</abbr>语法文件</td>
+</tr>
+<tr>
+<td>Include/</td>
+<td>公共头文件</td>
+</tr>
+<tr>
+<td>LICENSE</td>
+<td>授权信息</td>
+</tr>
+<tr>
+<td>Lib/</td>
+<td>Python部分标准库，均是Python写的</td>
+</tr>
+<tr>
+<td>Mac/</td>
+<td>Macintosh特定的资源（例如，用IDLE作为OS X的应用）</td>
+</tr>
+<tr>
+<td>Makefile.pre.in</td>
+<td>Source from which config.status creates the Makefile.pre</td>
+</tr>
+<tr>
+<td>Misc/</td>
+<td>其他有用的文件</td>
+</tr>
+<tr>
+<td>Modules/</td>
+<td>大部分内置模块的实现</td>
+</tr>
+<tr>
+<td>Objects/</td>
+<td>大部分内置对象类型的实现</td>
+</tr>
+<tr>
+<td>PC/</td>
+<td>PC特定的文件(DOS, Windows, OS/2)</td>
+</tr>
+<tr>
+<td>PCbuild/</td>
+<td>Microsoft Visual C++的build目录</td>
+</tr>
+<tr>
+<td>Parser/</td>
+<td>解析器和分词器以及他们的输入处理AST的节点也在这个文件夹</td>
+</tr>
+<tr>
+<td>Python/</td>
+<td>字节编译器和解释器，Python核心部分。</td>
+</tr>
+<tr>
+<td>README</td>
+<td>读我</td>
+</tr>
+<tr>
+<td>RISCOS/</td>
+<td>RISC操作系统特定的文件</td>
+</tr>
+<tr>
+<td>Tools/</td>
+<td>一些用Python写的有用的程序</td>
+</tr>
+<tr>
+<td>pyconfig.h.in</td>
+<td>Source from which pyconfig.h is created (GNU autoheader output)</td>
+</tr>
+<tr>
+<td>configure</td>
+<td>配置的shell脚本(GNU autoconf的输出)</td>
+</tr>
+<tr>
+<td>configure.ac</td>
+<td>配置格式(GNU autoconf的输入)</td>
+</tr>
+<tr>
+<td>install-sh</td>
+<td>用来安装文件的Shell脚本</td>
+</tr>
+</tbody>
+</table>
+<h1 id="4-贴士"><a href="#4-贴士" class="headerlink" title="4. 贴士"></a>4. 贴士</h1><p>  4.1. <code>Py_ssize_t</code><br>    首先理解什么是size_t，然后是ssize_t，然后你就知道什么是Py_ssize_t了。<br>  4.2. <code>int_repr</code><br>    在最新的Python代码中没有了int_repr这个函数，甚至没有了intobject。善用搜索引擎，发现了旧版本的intobject.c中有两处int_repr，一处是定义，一处是引用。<code>(reprfunc)int_repr, /* tp_repr */</code>拿注释<code>tp_repr</code>在新版里搜，发现了<code>long_to_decimal_string, /* tp_repr */</code>不出意外这就是改动后的函数，试试再按Python源码剖析的例子操作，成功输出。</p>
+<div class="alert warning no-icon"><p>未完待续</p>
+</div>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料:"></a>参考资料:</h1><blockquote>
+<p>[1] <a href="https://docs.python.org/devguide/" target="_blank" rel="external">Python Developer’s Guide — Python Developer’s Guide </a><br>[2] <a href="https://github.com/yyuu/pyenv/wiki/Common-build-problems" target="_blank" rel="external">Common build problems · yyuu/pyenv Wiki</a></p>
+</blockquote>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;a href=&quot;http://magiccards.info/6e/en/150.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;&lt;img src=&quot;http://magiccards.info/crop/en/6e/150.jpg&quot; alt=&quot;
+    
+    </summary>
+    
+      <category term="编程" scheme="https://tcztzy.github.io/categories/programming/"/>
+    
+    
+      <category term="python" scheme="https://tcztzy.github.io/tags/python/"/>
+    
+      <category term="Python源码学习笔记" scheme="https://tcztzy.github.io/tags/python-source-code-note/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Hello World</title>
+    <link href="https://tcztzy.github.io/2016/10/01/hello-world/"/>
+    <id>https://tcztzy.github.io/2016/10/01/hello-world/</id>
+    <published>2016-09-30T22:02:35.000Z</published>
+    <updated>2016-10-12T17:30:17.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>欢迎来到我的博客！<br>头像是我的男神薛定谔。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;欢迎来到我的博客！&lt;br&gt;头像是我的男神薛定谔。&lt;/p&gt;
+
+    
+    </summary>
+    
+    
+  </entry>
+  
+</feed>

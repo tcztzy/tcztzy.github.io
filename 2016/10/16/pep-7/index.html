@@ -1,0 +1,646 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="Tcztzy Blog">
+    <title>PEP 7 - Tcztzy Blog</title>
+    <meta name="author" content="唐梓涯">
+    
+    
+    
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
+    
+    <meta name="description" content="介绍本文提供Python的C实现的C代码的编码风格。Python代码的风格参见PEP 8。
+注意，规则有时也会被打破。两个打破特定规则的好的理由：
+
+当遵循这个规则回事代码更少地可读，即使其他人依据此规则去阅读代码。
+未保持和周围也打破规则的代码一致（也许是历史原因）–尽管有一个机会去清理别人的烂摊子（以真正的XP格式）
+
+C方言
+Python 3.6之前使用的是ANSI/ISO标准C（1989版">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="PEP 7">
+<meta property="og:url" content="https://tcztzy.github.io/2016/10/16/pep-7/index.html">
+<meta property="og:site_name" content="Tcztzy Blog">
+<meta property="og:description" content="介绍本文提供Python的C实现的C代码的编码风格。Python代码的风格参见PEP 8。
+注意，规则有时也会被打破。两个打破特定规则的好的理由：
+
+当遵循这个规则回事代码更少地可读，即使其他人依据此规则去阅读代码。
+未保持和周围也打破规则的代码一致（也许是历史原因）–尽管有一个机会去清理别人的烂摊子（以真正的XP格式）
+
+C方言
+Python 3.6之前使用的是ANSI/ISO标准C（1989版">
+<meta property="og:updated_time" content="2016-10-18T14:34:39.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="PEP 7">
+<meta name="twitter:description" content="介绍本文提供Python的C实现的C代码的编码风格。Python代码的风格参见PEP 8。
+注意，规则有时也会被打破。两个打破特定规则的好的理由：
+
+当遵循这个规则回事代码更少地可读，即使其他人依据此规则去阅读代码。
+未保持和周围也打破规则的代码一致（也许是历史原因）–尽管有一个机会去清理别人的烂摊子（以真正的XP格式）
+
+C方言
+Python 3.6之前使用的是ANSI/ISO标准C（1989版">
+    
+    
+        
+    
+    
+        <meta property="og:image" content="http://oexlj9n6m.bkt.clouddn.com/image/avatar.jpg/avatar"/>
+    
+    
+    
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/style-gxrkitjjfqp3e7vq7igezqpodxwvfywjetcxxc5vnnb46t4tlpxn0owp0xfx.min.css">
+    <!--STYLES END-->
+    
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-85403649-1']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+
+    
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+<header id="header" data-behavior="5">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <div class="header-title">
+        <a class="header-title-link" href="/ ">Tcztzy Blog</a>
+    </div>
+    
+        
+            <a  class="header-right-icon "
+                href="#about">
+        
+        
+            <i class="fa fa-lg fa-user-secret"></i>
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+
+        
+    
+
+<nav id="sidebar" data-behavior="5">
+    <div class="sidebar-container">
+        
+            <div class="sidebar-profile">
+                <a href="/#about">
+                    <img class="sidebar-profile-picture" src="http://oexlj9n6m.bkt.clouddn.com/image/avatar.jpg/avatar" alt="作者的图片"/>
+                </a>
+                <h4 class="sidebar-profile-name">唐梓涯</h4>
+                
+                    <h5 class="sidebar-profile-bio"><p>Pythoner, Emacser, GNU/Linuxer<br>目前在微软技术支持掏粪</p>
+</h5>
+                
+            </div>
+        
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a  class="sidebar-button-link "
+                             href="/ "
+                            
+                        >
+                    
+                        <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+                        <span class="sidebar-button-desc">首页</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a  class="sidebar-button-link "
+                             href="/all-categories"
+                            
+                        >
+                    
+                        <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+                        <span class="sidebar-button-desc">分类</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a  class="sidebar-button-link "
+                             href="/all-tags"
+                            
+                        >
+                    
+                        <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+                        <span class="sidebar-button-desc">标签</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a  class="sidebar-button-link "
+                             href="/all-archives"
+                            
+                        >
+                    
+                        <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+                        <span class="sidebar-button-desc">归档</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a  class="sidebar-button-link " href="https://github.com/tcztzy" target="_blank">
+                    
+                        <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+                        <span class="sidebar-button-desc">GitHub</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a  class="sidebar-button-link " href="mailto:tcztzy@gmail.com" target="_blank">
+                    
+                        <i class="sidebar-button-icon fa fa-lg fa-envelope-o"></i>
+                        <span class="sidebar-button-desc">邮箱</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a  class="sidebar-button-link "
+                             href="/links"
+                            
+                        >
+                    
+                        <i class="sidebar-button-icon fa fa-lg fa-external-link"></i>
+                        <span class="sidebar-button-desc">友情链接</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a  class="sidebar-button-link "
+                             href="/atom.xml"
+                            
+                        >
+                    
+                        <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+                        <span class="sidebar-button-desc">RSS</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+    </div>
+</nav>
+
+            
+            <div id="main" data-behavior="5"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post" itemscope itemType="http://schema.org/BlogPosting">
+    
+    
+        <div class="post-header main-content-wrap text-left">
+    
+        <h1 class="post-title" itemprop="headline">
+            PEP 7
+        </h1>
+    
+    <div class="post-meta">
+    <time itemprop="datePublished" datetime="2016-10-16T19:41:12+08:00">
+	
+		    10月 16, 2016
+    	
+    </time>
+    
+        <span>发布在 </span>
+        
+    <a class="category-link" href="/categories/programming/">编程</a>
+
+
+    
+</div>
+
+</div>
+    
+    <div class="post-content markdown" itemprop="articleBody">
+        <div class="main-content-wrap">
+            <h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p>本文提供Python的C实现的C代码的编码风格。Python代码的风格参见PEP 8。</p>
+<p>注意，规则有时也会被打破。两个打破特定规则的好的理由：</p>
+<ol>
+<li>当遵循这个规则回事代码更少地可读，即使其他人依据此规则去阅读代码。</li>
+<li>未保持和周围也打破规则的代码一致（也许是历史原因）–尽管有一个机会去清理别人的烂摊子（以真正的XP格式）</li>
+</ol>
+<h1 id="C方言"><a href="#C方言" class="headerlink" title="C方言"></a>C方言</h1><ul>
+<li>Python 3.6之前使用的是ANSI/ISO标准C（1989版标准）。这意味着（以及其他许多情况）所有的申明都必须在代码块顶部（不需要再函数的顶部）。</li>
+<li>Python 3.6及之后的版本使用采用了部分C99特性的C89：<ul>
+<li>标准整形在<code>&lt;stdint.h&gt;</code>和<code>&lt;inttypes.h&gt;</code>中。我们要求定宽的整形类型。</li>
+<li><code>static inline</code>函数</li>
+<li>指定初始化器（designated initializers），对类型定义特别好。</li>
+<li>混合申明</li>
+<li>布尔值</li>
+<li>C++风格的行注释<br>未来C99的特性可能会被添加到这个列表视编译器支持而定（主要是MSVC）。</li>
+</ul>
+</li>
+<li>不要使用GCC拓展（例如，不要写没有行尾的反斜杠的多行字符串）</li>
+<li>所有的函数申明和定义必须使用完全原型（例如，指定所有参数的类型）</li>
+<li>永远不要使用C++风格的<code>//</code>一行注释</li>
+<li>在几种主要编译器（gcc，VC++，一些其他的）上没有警告</li>
+</ul>
+<h1 id="代码布局"><a href="#代码布局" class="headerlink" title="代码布局"></a>代码布局</h1><ul>
+<li>使用4个空格缩进并完全禁用tab。</li>
+<li>每行不得超过79个字符。如果这一条和前一条一起没有给你的代码足够的空间，那么你的代码就太复杂了–考虑使用子程序。</li>
+<li><p>函数定义格式：函数名在第1列，最外面的花括号在第一列，在本地变量申明之后留空行。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">int</span></span></div><div class="line"><span class="title">extra_ivars</span><span class="params">(PyTypeObject *type, PyTypeObject *base)</span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">int</span> t_size = PyType_BASICSIZE(type);</div><div class="line">    <span class="keyword">int</span> b_size = PyType_BASICSIZE(base);</div><div class="line"></div><div class="line">    assert(t_size &gt;= b_size); <span class="comment">/* type smaller than base! */</span></div><div class="line">    ...</div><div class="line">    <span class="keyword">return</span> <span class="number">1</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>代码结构：在诸如<code>if</code>，<code>for</code>等关键词和接下来的左括号直接一个空格；在括号内没有空格；大括号被强烈推荐使用但可在C允许的情况下省略，并且它们应格式化成下面所示：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> (mro != <span class="literal">NULL</span>) &#123;</div><div class="line">    ...</div><div class="line">&#125;</div><div class="line"><span class="keyword">else</span> &#123;</div><div class="line">    ...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>return语句不应有多余的括号：<br><code>return Py_None; /* correct */</code><br><code>return(Py_None); /* incorrect */</code></p>
+</li>
+<li><p>函数和宏的调用风格：<code>foo(a, b, c)</code>–在左括号之前没有空格，在括号中没有空格，在逗号前没有空格，在每个逗号后一个空格。</p>
+</li>
+<li><p>总是在赋值符号，布尔值和比较符两边加上括号，在表达式中使用了很多操作符，在最外面的（最低优先级）的两边加上空格。</p>
+</li>
+<li><p>长行换行：如果可以，在最外层表达式的逗号后折行。总是保持缩进</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">PyErr_Format(PyExc_TypeError,</div><div class="line">             <span class="string">"cannot create '%.100s' instances"</span>,</div><div class="line">             type-&gt;tp_name);</div></pre></td></tr></table></figure>
+</li>
+<li><p>当你在长表达式的二元操作符处换行，这个操作符跟在前一行的行末，例如：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> (type-&gt;tp_dictoffset != <span class="number">0</span> &amp;&amp; base-&gt;tp_dictoffset == <span class="number">0</span> &amp;&amp;</div><div class="line">    type-&gt;tp_dictoffset == b_size &amp;&amp;</div><div class="line">    (<span class="keyword">size_t</span>)t_size == b_size + <span class="keyword">sizeof</span>(PyObject *))</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>; <span class="comment">/* "Forgive" adding a __dict__ only */</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>在函数、结构定义、函数的主要片段的前后留空行。</p>
+</li>
+<li><p>注释放在它们描述的函数之前。</p>
+</li>
+<li><p>所有的函数和全局变量申明为static，除非他们是发布的接口的一部分</p>
+</li>
+<li><p>对于外部函数和变量，我们总是在“Include”文件夹中合适的头文件中声明，使用PyAPI_FUNC()宏，如：</p>
+<p><code>PyAPI_FUNC(PyObject *) PyObject_Repr(PyObject *);</code></p>
+</li>
+</ul>
+<h1 id="命名习惯"><a href="#命名习惯" class="headerlink" title="命名习惯"></a>命名习惯</h1><ul>
+<li>公共函数使用<code>Py</code>前缀；永远不要给静态函数（使用<code>Py</code>前缀）。<code>Py_</code>前缀给全局服务</li>
+</ul>
+
+            
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap">
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">标签</span><br/>
+                
+    <a class="tag tag--primary tag--small t-link" href="/tags/python/">python</a>
+
+            </div>
+        
+        <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--disabled">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/10/13/python-source-code-note-0/" data-tooltip="Python源码学习笔记-0">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions"  href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://tcztzy.github.io/2016/10/16/pep-7/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://tcztzy.github.io/2016/10/16/pep-7/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://tcztzy.github.io/2016/10/16/pep-7/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+            <li class="post-action">
+                <a class="post-action-btn btn btn--default" href="#disqus_thread">
+                    <i class="fa fa-comment-o"></i>
+                </a>
+            </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+        
+            
+                <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+            
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+    <span class="copyrights">
+        Copyrights &copy; 2016 唐梓涯. All Rights Reserved.
+    </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="5">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--disabled">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/10/13/python-source-code-note-0/" data-tooltip="Python源码学习笔记-0">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions"  href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://tcztzy.github.io/2016/10/16/pep-7/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://tcztzy.github.io/2016/10/16/pep-7/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://tcztzy.github.io/2016/10/16/pep-7/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+            <li class="post-action">
+                <a class="post-action-btn btn btn--default" href="#disqus_thread">
+                    <i class="fa fa-comment-o"></i>
+                </a>
+            </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                <div id="share-options-bar" class="share-options-bar" data-behavior="5">
+    <ul class="share-options">
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=https://tcztzy.github.io/2016/10/16/pep-7/">
+                <i class="fa fa-google-plus"></i><span>分享到 Google+</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://tcztzy.github.io/2016/10/16/pep-7/">
+                <i class="fa fa-facebook-official"></i><span>分享到 Facebook</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=https://tcztzy.github.io/2016/10/16/pep-7/">
+                <i class="fa fa-twitter"></i><span>分享到 Twitter</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+
+            
+        </div>
+        
+
+
+    
+        
+    
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-remove"></i>
+        </div>
+        
+            <img id="about-card-picture" src="http://oexlj9n6m.bkt.clouddn.com/image/avatar.jpg/avatar" alt="作者的图片"/>
+        
+            <h4 id="about-card-name">唐梓涯</h4>
+        
+            <div id="about-card-bio"><p>Pythoner, Emacser, GNU/Linuxer<br>目前在微软技术支持掏粪</p>
+</div>
+        
+        
+            <div id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br/>
+                <p>全栈工程师</p>
+
+            </div>
+        
+        
+            <div id="about-card-location">
+                <i class="fa fa-map-marker"></i>
+                <br/>
+                中国无锡
+            </div>
+        
+    </div>
+</div>
+
+        <div id="algolia-search-modal" class="modal-container">
+    <div class="modal">
+        <div class="modal-header">
+            <span class="close-button"><i class="fa fa-close"></i></span>
+            <a href="https://algolia.com" target="_blank" class="searchby-algolia text-color-light link-unstyled">
+                <span class="searchby-algolia-text text-color-light text-small">by</span>
+                <img class="searchby-algolia-logo" src="https://www.algolia.com/static_assets/images/press/downloads/algolia-light.svg">
+            </a>
+            <i class="search-icon fa fa-search"></i>
+            <form id="algolia-search-form">
+                <input type="text" id="algolia-search-input" name="search"
+                    class="form-control input--large search-input" placeholder="Search "
+                    autofocus="autofocus"/>
+            </form>
+        </div>
+        <div class="modal-body">
+            <div class="no-result text-color-light text-center">没有找到文章</div>
+            <div class="results">
+                
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="https://tcztzy.github.io/2016/10/01/hello-world/">
+                            <h3 class="media-heading">Hello World</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2016年10月1日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="https://tcztzy.github.io/2016/10/13/python-source-code-note-0/">
+                            <h3 class="media-heading">Python源码学习笔记-0</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2016年10月13日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="https://tcztzy.github.io/2016/10/16/pep-7/">
+                            <h3 class="media-heading">PEP 7</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2016年10月16日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+            </div>
+        </div>
+        <div class="modal-footer">
+            <p class="results-count text-medium"
+                data-message-zero="没有找到文章"
+                data-message-one="找到 1 篇文章"
+                data-message-other="找到 {n} 篇文章">
+                找到 3 篇文章
+            </p>
+        </div>
+    </div>
+</div>
+        
+<div id="cover" style="background-image:url('http://oexlj9n6m.bkt.clouddn.com/image/cover.jpg');"></div>
+        <!--SCRIPTS-->
+<script src="/assets/js/script-aefdxebvplc4ftfj4r0flyrd6szwoqme4warbwhkeovj1fw0fyshidtnund1.min.js"></script>
+<!--SCRIPTS END-->
+
+    
+        <script>
+             var disqus_config = function () {
+                 this.page.url = 'https://tcztzy.github.io/2016/10/16/pep-7/';
+                 
+                    this.page.identifier = '2016/10/16/pep-7/';
+                 
+             };
+            (function() {
+                var d = document, s = d.createElement('script');
+                var disqus_shortname = 'tcztzy';
+                s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+            })();
+        </script>
+    
+
+
+
+    </body>
+</html>
