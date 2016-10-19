@@ -211,6 +211,70 @@
             <div class="postShorten-header">
                 <h1 class="postShorten-title" itemprop="headline">
                     
+                        <a class="link-unstyled" href="/2016/10/20/menlo-font-on-windows/">
+                            Hexo主题Tranquilpeak代码等宽字体问题研究
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time itemprop="datePublished" datetime="2016-10-20T03:43:12+08:00">
+	
+		    10月 20, 2016
+    	
+    </time>
+    
+        <span>发布在 </span>
+        
+    <a class="category-link" href="/categories/programming/">编程</a>
+
+
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content" itemprop="articleBody">
+                    <p><a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>是一个比较火的博客框架（主观），然后我使用了其中的<a href="https://github.com/LouisBarranqueiro/hexo-theme-tranquilpeak" target="_blank" rel="external">Tranquilpeak</a>主题，但是发现写着写着发现，本来应该等宽的代码部分明显不是等宽的，然后就<a href="https://github.com/LouisBarranqueiro/hexo-theme-tranquilpeak/blob/master/docs/user.md#change-global-style" target="_blank" rel="external">翻文档</a></p>
+<blockquote>
+<h3 id="Change-global-style"><a href="#Change-global-style" class="headerlink" title="Change global style"></a>Change global style</h3><p>If you want to change font families, font size, sidebar color, things like that, take a look at <code>source/_css/utils/_variables.scss</code> file. This file contains global variables used in this theme. <strong>Build the theme after changes to see changes.</strong></p>
+</blockquote>
+<p>OK，接着<a href="https://github.com/LouisBarranqueiro/hexo-theme-tranquilpeak/blob/41cf0e78bdd2d65f0dd8213a6a7d12e732e6044f/source/_css/utils/_variables.scss#L16" target="_blank" rel="external">翻源码</a></p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">// Global settings</div><div class="line">// --------------------------------------------</div><div class="line"></div><div class="line">// Font families</div><div class="line">$open-sans:            'Open Sans';</div><div class="line">$open-sans-sans-serif: 'Open Sans', sans-serif;</div><div class="line">$merriweather-serif:   'Merriweather', serif;</div><div class="line">$menlo:                 Menlo;</div><div class="line"></div><div class="line">$font-family-base: $open-sans-sans-serif;</div><div class="line"></div><div class="line">$font-families: (</div><div class="line">   // base</div><div class="line">   'headings':          $open-sans-sans-serif,</div><div class="line">   // components</div><div class="line">   'code':              $menlo,</div><div class="line">   'caption':           $merriweather-serif,</div><div class="line">   'image-gallery':     $open-sans,</div><div class="line">   'post-header-cover': $merriweather-serif,</div><div class="line">   'post-meta':         $open-sans-sans-serif,</div><div class="line">   'post-content':      $merriweather-serif,</div><div class="line">   'post-excerpt-link': $open-sans-sans-serif,</div><div class="line">   'highlight':         $menlo,</div><div class="line">   // layout</div><div class="line">   'sidebar':           $open-sans-sans-serif</div><div class="line">);</div></pre></td></tr></table></figure>
+<p><a href="http://lmgtfy.com/?q=Menlo+font" target="_blank" rel="external">Menlo这个字体</a>是mono space的呀，怎么显示不对呢，然后我注意到<a href="https://zh.wikipedia.org/wiki/Menlo" target="_blank" rel="external">这么一段话</a>:</p>
+<blockquote>
+<p>Menlo是一个无衬线等宽字体，由Jim Lyles设计，首次出现于2009年8月上市的<strong>Mac OS X Snow Leopard系统内建字体之一</strong>。基于开源字体Bitstream Vera与自由版权字体DejaVu字体改良而来</p>
+</blockquote>
+<p>什么？Mac OS X内建字体？那也就是说本穷用的Windows 10 Home应该是不会有咯。然后本穷就<a href="https://github.com/hbin/top-programming-fonts/raw/master/Menlo-Regular.ttf" target="_blank" rel="external">下载</a>，安装，重启浏览器，OK，终于显示正确了。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul>
+<li><p>Web开发不得不考虑跨平台的问题，所以一定不能在字体这个地方栽跟头，不能说你用的Mac开发的你就用Menlo不管了，好歹加个备选的monospace。</p>
+</li>
+<li><p>issue给作者之后发现，问题已经被fix，但是还得等下个版本release才能见到。这又教导我，在issue之前最好好好搜一下已有的issue和pull request，已经有的问题不要重复开issue。</p>
+</li>
+</ul>
+
+                    
+                        
+                    
+                    
+                        <p>
+                            <a href="/2016/10/20/menlo-font-on-windows/#post-footer" class="postShorten-excerpt_link link">
+                                注释和共享
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title" itemprop="headline">
+                    
                         <a class="link-unstyled" href="/2016/10/16/pep-7/">
                             PEP 7
                         </a>
@@ -649,6 +713,25 @@ libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev libncursesw5-dev x
                     <hr>
                 </div>
                 
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="https://tcztzy.github.io/2016/10/20/menlo-font-on-windows/">
+                            <h3 class="media-heading">Hexo主题Tranquilpeak代码等宽字体问题研究</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2016年10月20日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
             </div>
         </div>
         <div class="modal-footer">
@@ -656,7 +739,7 @@ libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev libncursesw5-dev x
                 data-message-zero="没有找到文章"
                 data-message-one="找到 1 篇文章"
                 data-message-other="找到 {n} 篇文章">
-                找到 3 篇文章
+                找到 4 篇文章
             </p>
         </div>
     </div>

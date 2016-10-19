@@ -6,23 +6,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="Tcztzy Blog">
-    <title>Hello World - Tcztzy Blog</title>
+    <title>Hexo主题Tranquilpeak代码等宽字体问题研究 - Tcztzy Blog</title>
     <meta name="author" content="唐梓涯">
     
     
     
         <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
     
-    <meta name="description" content="欢迎来到我的博客！头像是我的男神薛定谔。">
+    <meta name="description" content="Hexo是一个比较火的博客框架（主观），然后我使用了其中的Tranquilpeak主题，但是发现写着写着发现，本来应该等宽的代码部分明显不是等宽的，然后就翻文档
+
+Change global styleIf you want to change font families, font size, sidebar color, things like that, take a look at sou">
 <meta property="og:type" content="blog">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="https://tcztzy.github.io/2016/10/01/hello-world/index.html">
+<meta property="og:title" content="Hexo主题Tranquilpeak代码等宽字体问题研究">
+<meta property="og:url" content="https://tcztzy.github.io/2016/10/20/menlo-font-on-windows/index.html">
 <meta property="og:site_name" content="Tcztzy Blog">
-<meta property="og:description" content="欢迎来到我的博客！头像是我的男神薛定谔。">
-<meta property="og:updated_time" content="2016-10-12T17:30:17.000Z">
+<meta property="og:description" content="Hexo是一个比较火的博客框架（主观），然后我使用了其中的Tranquilpeak主题，但是发现写着写着发现，本来应该等宽的代码部分明显不是等宽的，然后就翻文档
+
+Change global styleIf you want to change font families, font size, sidebar color, things like that, take a look at sou">
+<meta property="og:updated_time" content="2016-10-19T21:16:36.141Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hello World">
-<meta name="twitter:description" content="欢迎来到我的博客！头像是我的男神薛定谔。">
+<meta name="twitter:title" content="Hexo主题Tranquilpeak代码等宽字体问题研究">
+<meta name="twitter:description" content="Hexo是一个比较火的博客框架（主观），然后我使用了其中的Tranquilpeak主题，但是发现写着写着发现，本来应该等宽的代码部分明显不是等宽的，然后就翻文档
+
+Change global styleIf you want to change font families, font size, sidebar color, things like that, take a look at sou">
     
     
         
@@ -212,15 +218,21 @@
         <div class="post-header main-content-wrap text-left">
     
         <h1 class="post-title" itemprop="headline">
-            Hello World
+            Hexo主题Tranquilpeak代码等宽字体问题研究
         </h1>
     
     <div class="post-meta">
-    <time itemprop="datePublished" datetime="2016-10-01T06:02:35+08:00">
+    <time itemprop="datePublished" datetime="2016-10-20T03:43:12+08:00">
 	
-		    10月 01, 2016
+		    10月 20, 2016
     	
     </time>
+    
+        <span>发布在 </span>
+        
+    <a class="category-link" href="/categories/programming/">编程</a>
+
+
     
 </div>
 
@@ -228,19 +240,42 @@
     
     <div class="post-content markdown" itemprop="articleBody">
         <div class="main-content-wrap">
-            <p>欢迎来到我的博客！<br>头像是我的男神薛定谔。</p>
+            <p><a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>是一个比较火的博客框架（主观），然后我使用了其中的<a href="https://github.com/LouisBarranqueiro/hexo-theme-tranquilpeak" target="_blank" rel="external">Tranquilpeak</a>主题，但是发现写着写着发现，本来应该等宽的代码部分明显不是等宽的，然后就<a href="https://github.com/LouisBarranqueiro/hexo-theme-tranquilpeak/blob/master/docs/user.md#change-global-style" target="_blank" rel="external">翻文档</a></p>
+<blockquote>
+<h3 id="Change-global-style"><a href="#Change-global-style" class="headerlink" title="Change global style"></a>Change global style</h3><p>If you want to change font families, font size, sidebar color, things like that, take a look at <code>source/_css/utils/_variables.scss</code> file. This file contains global variables used in this theme. <strong>Build the theme after changes to see changes.</strong></p>
+</blockquote>
+<p>OK，接着<a href="https://github.com/LouisBarranqueiro/hexo-theme-tranquilpeak/blob/41cf0e78bdd2d65f0dd8213a6a7d12e732e6044f/source/_css/utils/_variables.scss#L16" target="_blank" rel="external">翻源码</a></p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">// Global settings</div><div class="line">// --------------------------------------------</div><div class="line"></div><div class="line">// Font families</div><div class="line">$open-sans:            'Open Sans';</div><div class="line">$open-sans-sans-serif: 'Open Sans', sans-serif;</div><div class="line">$merriweather-serif:   'Merriweather', serif;</div><div class="line">$menlo:                 Menlo;</div><div class="line"></div><div class="line">$font-family-base: $open-sans-sans-serif;</div><div class="line"></div><div class="line">$font-families: (</div><div class="line">   // base</div><div class="line">   'headings':          $open-sans-sans-serif,</div><div class="line">   // components</div><div class="line">   'code':              $menlo,</div><div class="line">   'caption':           $merriweather-serif,</div><div class="line">   'image-gallery':     $open-sans,</div><div class="line">   'post-header-cover': $merriweather-serif,</div><div class="line">   'post-meta':         $open-sans-sans-serif,</div><div class="line">   'post-content':      $merriweather-serif,</div><div class="line">   'post-excerpt-link': $open-sans-sans-serif,</div><div class="line">   'highlight':         $menlo,</div><div class="line">   // layout</div><div class="line">   'sidebar':           $open-sans-sans-serif</div><div class="line">);</div></pre></td></tr></table></figure>
+<p><a href="http://lmgtfy.com/?q=Menlo+font" target="_blank" rel="external">Menlo这个字体</a>是mono space的呀，怎么显示不对呢，然后我注意到<a href="https://zh.wikipedia.org/wiki/Menlo" target="_blank" rel="external">这么一段话</a>:</p>
+<blockquote>
+<p>Menlo是一个无衬线等宽字体，由Jim Lyles设计，首次出现于2009年8月上市的<strong>Mac OS X Snow Leopard系统内建字体之一</strong>。基于开源字体Bitstream Vera与自由版权字体DejaVu字体改良而来</p>
+</blockquote>
+<p>什么？Mac OS X内建字体？那也就是说本穷用的Windows 10 Home应该是不会有咯。然后本穷就<a href="https://github.com/hbin/top-programming-fonts/raw/master/Menlo-Regular.ttf" target="_blank" rel="external">下载</a>，安装，重启浏览器，OK，终于显示正确了。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul>
+<li><p>Web开发不得不考虑跨平台的问题，所以一定不能在字体这个地方栽跟头，不能说你用的Mac开发的你就用Menlo不管了，好歹加个备选的monospace。</p>
+</li>
+<li><p>issue给作者之后发现，问题已经被fix，但是还得等下个版本release才能见到。这又教导我，在issue之前最好好好搜一下已有的issue和pull request，已经有的问题不要重复开issue。</p>
+</li>
+</ul>
 
             
         </div>
     </div>
     <div id="post-footer" class="post-footer main-content-wrap">
         
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">标签</span><br/>
+                
+    <a class="tag tag--primary tag--small t-link" href="/tags/front-end-web-development/">前端</a>
+
+            </div>
+        
         <div class="post-actions-wrap">
     <nav>
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/10/13/python-source-code-note-0/"  data-tooltip="Python源码学习笔记-0">
+                    <a class="post-action-btn btn btn--disabled">
                 
                     <i class="fa fa-angle-left"></i>
                     <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
@@ -248,7 +283,7 @@
             </li>
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--disabled">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/10/16/pep-7/" data-tooltip="PEP 7">
                 
                     <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
                     <i class="fa fa-angle-right"></i>
@@ -263,17 +298,17 @@
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://tcztzy.github.io/2016/10/01/hello-world/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://tcztzy.github.io/2016/10/20/menlo-font-on-windows/">
                 <i class="fa fa-google-plus"></i>
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://tcztzy.github.io/2016/10/01/hello-world/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://tcztzy.github.io/2016/10/20/menlo-font-on-windows/">
                 <i class="fa fa-facebook-official"></i>
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://tcztzy.github.io/2016/10/01/hello-world/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://tcztzy.github.io/2016/10/20/menlo-font-on-windows/">
                 <i class="fa fa-twitter"></i>
             </a>
         </li>
@@ -321,7 +356,7 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/10/13/python-source-code-note-0/"  data-tooltip="Python源码学习笔记-0">
+                    <a class="post-action-btn btn btn--disabled">
                 
                     <i class="fa fa-angle-left"></i>
                     <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
@@ -329,7 +364,7 @@
             </li>
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--disabled">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/10/16/pep-7/" data-tooltip="PEP 7">
                 
                     <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
                     <i class="fa fa-angle-right"></i>
@@ -344,17 +379,17 @@
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://tcztzy.github.io/2016/10/01/hello-world/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://tcztzy.github.io/2016/10/20/menlo-font-on-windows/">
                 <i class="fa fa-google-plus"></i>
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://tcztzy.github.io/2016/10/01/hello-world/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://tcztzy.github.io/2016/10/20/menlo-font-on-windows/">
                 <i class="fa fa-facebook-official"></i>
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://tcztzy.github.io/2016/10/01/hello-world/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://tcztzy.github.io/2016/10/20/menlo-font-on-windows/">
                 <i class="fa fa-twitter"></i>
             </a>
         </li>
@@ -380,17 +415,17 @@
                 <div id="share-options-bar" class="share-options-bar" data-behavior="5">
     <ul class="share-options">
         <li class="share-option">
-            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=https://tcztzy.github.io/2016/10/01/hello-world/">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=https://tcztzy.github.io/2016/10/20/menlo-font-on-windows/">
                 <i class="fa fa-google-plus"></i><span>分享到 Google+</span>
             </a>
         </li>
         <li class="share-option">
-            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://tcztzy.github.io/2016/10/01/hello-world/">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://tcztzy.github.io/2016/10/20/menlo-font-on-windows/">
                 <i class="fa fa-facebook-official"></i><span>分享到 Facebook</span>
             </a>
         </li>
         <li class="share-option">
-            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=https://tcztzy.github.io/2016/10/01/hello-world/">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=https://tcztzy.github.io/2016/10/20/menlo-font-on-windows/">
                 <i class="fa fa-twitter"></i><span>分享到 Twitter</span>
             </a>
         </li>
@@ -554,9 +589,9 @@
     
         <script>
              var disqus_config = function () {
-                 this.page.url = 'https://tcztzy.github.io/2016/10/01/hello-world/';
+                 this.page.url = 'https://tcztzy.github.io/2016/10/20/menlo-font-on-windows/';
                  
-                    this.page.identifier = '2016/10/01/hello-world/';
+                    this.page.identifier = '2016/10/20/menlo-font-on-windows/';
                  
              };
             (function() {
