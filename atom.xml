@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://tcztzy.github.io/"/>
-  <updated>2016-10-18T14:34:39.000Z</updated>
+  <updated>2016-10-19T19:02:23.403Z</updated>
   <id>https://tcztzy.github.io/</id>
   
   <author>
@@ -20,9 +20,9 @@
     <link href="https://tcztzy.github.io/2016/10/16/pep-7/"/>
     <id>https://tcztzy.github.io/2016/10/16/pep-7/</id>
     <published>2016-10-16T11:41:12.000Z</published>
-    <updated>2016-10-18T14:34:39.000Z</updated>
+    <updated>2016-10-19T19:02:23.403Z</updated>
     
-    <content type="html"><![CDATA[<h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p>本文提供Python的C实现的C代码的编码风格。Python代码的风格参见PEP 8。</p>
+    <content type="html"><![CDATA[<h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p>本文提供Python的C实现的C代码的编码风格。Python代码的风格指南参见相关信息的PEP<a class="footnote-reference" href="#id2" id="id1">[1]</a>。</p>
 <p>注意，规则有时也会被打破。两个打破特定规则的好的理由：</p>
 <ol>
 <li>当遵循这个规则回事代码更少地可读，即使其他人依据此规则去阅读代码。</li>
@@ -47,12 +47,14 @@
 <h1 id="代码布局"><a href="#代码布局" class="headerlink" title="代码布局"></a>代码布局</h1><ul>
 <li>使用4个空格缩进并完全禁用tab。</li>
 <li>每行不得超过79个字符。如果这一条和前一条一起没有给你的代码足够的空间，那么你的代码就太复杂了–考虑使用子程序。</li>
-<li><p>函数定义格式：函数名在第1列，最外面的花括号在第一列，在本地变量申明之后留空行。</p>
+<li>函数定义格式：函数名在第1列，最外面的花括号在第一列，在本地变量申明之后留空行。</li>
+</ul>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">int</span></span></div><div class="line"><span class="title">extra_ivars</span><span class="params">(PyTypeObject *type, PyTypeObject *base)</span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">int</span> t_size = PyType_BASICSIZE(type);</div><div class="line">    <span class="keyword">int</span> b_size = PyType_BASICSIZE(base);</div><div class="line"></div><div class="line">    assert(t_size &gt;= b_size); <span class="comment">/* type smaller than base! */</span></div><div class="line">    ...</div><div class="line">    <span class="keyword">return</span> <span class="number">1</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-<li><p>代码结构：在诸如<code>if</code>，<code>for</code>等关键词和接下来的左括号直接一个空格；在括号内没有空格；大括号被强烈推荐使用但可在C允许的情况下省略，并且它们应格式化成下面所示：</p>
+<ul>
+<li>代码结构：在诸如<code>if</code>，<code>for</code>等关键词和接下来的左括号直接一个空格；在括号内没有空格；大括号被强烈推荐使用但可在C允许的情况下省略，并且它们应格式化成下面所示：</li>
+</ul>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> (mro != <span class="literal">NULL</span>) &#123;</div><div class="line">    ...</div><div class="line">&#125;</div><div class="line"><span class="keyword">else</span> &#123;</div><div class="line">    ...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
+<ul>
 <li><p>return语句不应有多余的括号：<br><code>return Py_None; /* correct */</code><br><code>return(Py_None); /* incorrect */</code></p>
 </li>
 <li><p>函数和宏的调用风格：<code>foo(a, b, c)</code>–在左括号之前没有空格，在括号中没有空格，在逗号前没有空格，在每个逗号后一个空格。</p>
@@ -76,14 +78,53 @@
 </li>
 </ul>
 <h1 id="命名习惯"><a href="#命名习惯" class="headerlink" title="命名习惯"></a>命名习惯</h1><ul>
-<li>公共函数使用<code>Py</code>前缀；永远不要给静态函数（使用<code>Py</code>前缀）。<code>Py_</code>前缀给全局服务</li>
+<li><p>公共函数使用<code>Py</code>前缀；永远不要给静态函数（使用<code>Py</code>前缀）。<code>Py_</code>前缀给全局服务例程如<code>Py_FatalError</code>；特定的服务组（例如特定对象类型API）使用长前缀例如字符串使用PyString_。</p>
+</li>
+<li><p>公共函数和变量使用混合大小写以及下划线，例如这些：<code>PyObject_GetAttr</code>，<code>Py_BuildValue</code>，<code>PyExc_TypeError</code>。</p>
+</li>
+<li><p>偶尔的一个“内部”函数需要对加载器可见，对此我们使用<code>_Py</code>前缀，例如：<code>_PyObject_Dump</code>。</p>
+</li>
+<li><p>宏应该是混合大小写的前缀跟着大写，例如：<code>PyString_AS_STRING</code>，<code>Py_PRINT_RAW</code>。</p>
+</li>
 </ul>
+<h1 id="文档字符串"><a href="#文档字符串" class="headerlink" title="文档字符串"></a>文档字符串</h1><ul>
+<li><p>对文档字符串使用<code>PyDoc_STR()</code>或者<code>PyDoc_STRVAR()</code>宏以获得无文档字符串地编译Python（<code>./configure --without-doc-strings</code>）。</p>
+<p>对于需要支持早于2.3版本Python的C代码，你可以在引入<code>Python.h</code>后包含如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> PyDoc_STR</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> PyDoc_VAR(name)         static char name[]</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> PyDoc_STR(str)          (str)</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> PyDoc_STRVAR(name, str) PyDoc_VAR(name) = PyDoc_STR(str)</span></div><div class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></div></pre></td></tr></table></figure>
+</li>
+<li><p>函数文档字符串的第一行应是一个“签名行”–给出一个参数和返回值简短的概要，例如：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">PyDoc_STRVAR(myfunction__doc__,</div><div class="line"><span class="string">"myfunction(name, value) -&gt; bool\n\n\</span></div><div class="line">Determine whether name and value make a valid pair.");</div></pre></td></tr></table></figure>
+<p>总是包含一个空行在签名行和描述的文本之间。</p>
+<p>如果函数的返回值总是为<code>None</code>（因为没有有意义的返回值），不要写返回类型的提示。</p>
+</li>
+<li><p>当写多行文档字符串时，确保总是像上面例子中使用反斜杠继续，或者字符串字面相连：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">PyDoc_STRVAR(myfunction__doc__,</div><div class="line"><span class="string">"myfunction(name, value) -&gt; bool\n\n"</span></div><div class="line"><span class="string">"Determine whether name and value make a valid pair."</span>);</div></pre></td></tr></table></figure>
+<p>尽管一些C编译器接受没有上述两种规范的字符串：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">/* BAD -- don't do this! */</div><div class="line">PyDoc_STRVAR(myfunction__doc__,</div><div class="line">"myfunction(name, value) -&gt; bool\n\n</div><div class="line">Determine whether name and value make a valid pair.");</div></pre></td></tr></table></figure>
+<p>不要这么做；已知MSVC编译器会抱怨这个。</p>
+</li>
+</ul>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><table>
+<thead>
+<tr>
+<th><span style="display: none"></span></th>
+<th><span style="display: none"></span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a class="fn-backref" href="#id1" id="id2">[1]</a></td>
+<td><a href="http://www.python.org/dev/peps/pep-0008" target="_blank" rel="external">PEP 8</a> , “Style Guide for Python Code”, van Rossum, Warsaw ( <a href="http://www.python.org/dev/peps/pep-0008" target="_blank" rel="external">http://www.python.org/dev/peps/pep-0008</a> )</td>
+</tr>
+</tbody>
+</table>
+<h1 id="版权信息"><a href="#版权信息" class="headerlink" title="版权信息"></a>版权信息</h1><p>此文档已放在公共领域。</p>
+<p>源：<a href="https://github.com/python/peps/blob/master/pep-0007.txt" target="_blank" rel="external">https://github.com/python/peps/blob/master/pep-0007.txt</a></p>
 ]]></content>
     
     <summary type="html">
     
-      &lt;h1 id=&quot;介绍&quot;&gt;&lt;a href=&quot;#介绍&quot; class=&quot;headerlink&quot; title=&quot;介绍&quot;&gt;&lt;/a&gt;介绍&lt;/h1&gt;&lt;p&gt;本文提供Python的C实现的C代码的编码风格。Python代码的风格参见PEP 8。&lt;/p&gt;
-&lt;p&gt;注意，规则有时也会被打破。两个打破特定
+      &lt;h1 id=&quot;介绍&quot;&gt;&lt;a href=&quot;#介绍&quot; class=&quot;headerlink&quot; title=&quot;介绍&quot;&gt;&lt;/a&gt;介绍&lt;/h1&gt;&lt;p&gt;本文提供Python的C实现的C代码的编码风格。Python代码的风格指南参见相关信息的PEP&lt;a class=&quot;footnote-refe
     
     </summary>
     
