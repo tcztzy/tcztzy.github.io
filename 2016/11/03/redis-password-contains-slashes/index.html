@@ -22,7 +22,7 @@
 <meta property="og:description" content="今天在把Azure Redis Cache集成到Django项目的时候发现一个奇怪的报错，
 检查一下我的settings.py是这么写的：123456789CACHES = &amp;#123;    &quot;default&quot;: &amp;#123;        &quot;BACKEND&quot;: &quot;django_redis.cache.RedisCache&quot;,        &quot;LOCATION&quot;: &quot;rediss://:iAIT">
 <meta property="og:image" content="http://oexlj9n6m.bkt.clouddn.com/Capture.PNG">
-<meta property="og:updated_time" content="2016-11-03T12:47:22.484Z">
+<meta property="og:updated_time" content="2016-11-03T13:14:20.059Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="当Redis的密码包含`/`">
 <meta name="twitter:description" content="今天在把Azure Redis Cache集成到Django项目的时候发现一个奇怪的报错，
@@ -250,7 +250,7 @@
         <div class="main-content-wrap">
             <p>今天在把Azure Redis Cache集成到Django项目的时候发现一个奇怪的报错，<img src="http://oexlj9n6m.bkt.clouddn.com/Capture.PNG" alt="ValueError at /login/ invalid literal for int() with base 10: &#39;iAITMl7lD127c&#39;"></p>
 <p>检查一下我的settings.py是这么写的：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">CACHES = &#123;</div><div class="line">    <span class="string">"default"</span>: &#123;</div><div class="line">        <span class="string">"BACKEND"</span>: <span class="string">"django_redis.cache.RedisCache"</span>,</div><div class="line">        <span class="string">"LOCATION"</span>: <span class="string">"rediss://:iAITMl7lD127c/VZEl0OZl8qviaXHIoKekaJjP1J1HI=@#马赛克#:6380/0"</span>,</div><div class="line">        <span class="string">"OPTIONS"</span>: &#123;</div><div class="line">            <span class="string">"CLIENT_CLASS"</span>: <span class="string">"django_redis.client.DefaultClient"</span>,</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>然后发现报错信息中的<code>iAITMl7lD127c</code>正好就是<code>/</code>前面的内容，料想应该是解析URL的时候错把这个<code>/</code>当做分隔符了。一路TraceBack发现正是Python的标准库urlparse中抛出的错误，然后义正言辞地去找redis-py，结果发现人家<a href="https://github.com/andymccurdy/redis-py/pull/586" target="_blank" rel="external">已经修复了</a>，但是一年多了还没release到pypi上。我目前的解决方案是，刷一个不带<code>/</code>的密码。</p>
+<p>然后发现报错信息中的<code>iAITMl7lD127c</code>正好就是<code>/</code>前面的内容，料想应该是解析URL的时候错把这个<code>/</code>当做分隔符了。一路TraceBack发现正是Python的标准库urlparse中抛出的错误，然后义正言辞地去找redis-py，结果发现人家<a href="https://github.com/andymccurdy/redis-py/pull/586" target="_blank" rel="external">已经修复了</a>，但是django-redis应该不会对此进行修改，因为作者是知道这个BUG的但是也没改，而是给了之前的OPTIONS的解决方案。我目前的解决方案是，刷一个不带<code>/</code>的密码或者这样用：<br>```Python<br>CACHES = {<br>    “default”: {<br>        “BACKEND”: “django_redis.cache.RedisCache”,<br>        “LOCATION”: “rediss://#马赛克#:6380/0”,<br>        “OPTIONS”: {<br>            “CLIENT_CLASS”: “django_redis.client.DefaultClient”,<br>            “PASSWORD”: “iAITMl7lD127c/VZEl0OZl8qviaXHIoKekaJjP1J1HI=”,<br>        }<br>    }<br>}<br>。</p>
 <p><a href="https://github.com/niwinz/django-redis/issues/114" target="_blank" rel="external">https://github.com/niwinz/django-redis/issues/114</a><br><a href="https://github.com/andymccurdy/redis-py/issues/579" target="_blank" rel="external">https://github.com/andymccurdy/redis-py/issues/579</a></p>
 
             
