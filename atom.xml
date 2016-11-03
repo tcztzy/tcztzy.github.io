@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://tcztzy.github.io/"/>
-  <updated>2016-10-27T23:14:55.487Z</updated>
+  <updated>2016-11-03T12:47:22.484Z</updated>
   <id>https://tcztzy.github.io/</id>
   
   <author>
@@ -14,6 +14,34 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>当Redis的密码包含`/`</title>
+    <link href="https://tcztzy.github.io/2016/11/03/redis-password-contains-slashes/"/>
+    <id>https://tcztzy.github.io/2016/11/03/redis-password-contains-slashes/</id>
+    <published>2016-11-03T08:49:23.000Z</published>
+    <updated>2016-11-03T12:47:22.484Z</updated>
+    
+    <content type="html"><![CDATA[<p>今天在把Azure Redis Cache集成到Django项目的时候发现一个奇怪的报错，<img src="http://oexlj9n6m.bkt.clouddn.com/Capture.PNG" alt="ValueError at /login/ invalid literal for int() with base 10: &#39;iAITMl7lD127c&#39;"></p>
+<p>检查一下我的settings.py是这么写的：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">CACHES = &#123;</div><div class="line">    <span class="string">"default"</span>: &#123;</div><div class="line">        <span class="string">"BACKEND"</span>: <span class="string">"django_redis.cache.RedisCache"</span>,</div><div class="line">        <span class="string">"LOCATION"</span>: <span class="string">"rediss://:iAITMl7lD127c/VZEl0OZl8qviaXHIoKekaJjP1J1HI=@#马赛克#:6380/0"</span>,</div><div class="line">        <span class="string">"OPTIONS"</span>: &#123;</div><div class="line">            <span class="string">"CLIENT_CLASS"</span>: <span class="string">"django_redis.client.DefaultClient"</span>,</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>然后发现报错信息中的<code>iAITMl7lD127c</code>正好就是<code>/</code>前面的内容，料想应该是解析URL的时候错把这个<code>/</code>当做分隔符了。一路TraceBack发现正是Python的标准库urlparse中抛出的错误，然后义正言辞地去找redis-py，结果发现人家<a href="https://github.com/andymccurdy/redis-py/pull/586" target="_blank" rel="external">已经修复了</a>，但是一年多了还没release到pypi上。我目前的解决方案是，刷一个不带<code>/</code>的密码。</p>
+<p><a href="https://github.com/niwinz/django-redis/issues/114" target="_blank" rel="external">https://github.com/niwinz/django-redis/issues/114</a><br><a href="https://github.com/andymccurdy/redis-py/issues/579" target="_blank" rel="external">https://github.com/andymccurdy/redis-py/issues/579</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;今天在把Azure Redis Cache集成到Django项目的时候发现一个奇怪的报错，&lt;img src=&quot;http://oexlj9n6m.bkt.clouddn.com/Capture.PNG&quot; alt=&quot;ValueError at /login/ invalid l
+    
+    </summary>
+    
+      <category term="编程" scheme="https://tcztzy.github.io/categories/programming/"/>
+    
+    
+      <category term="Python" scheme="https://tcztzy.github.io/tags/Python/"/>
+    
+      <category term="Redis" scheme="https://tcztzy.github.io/tags/Redis/"/>
+    
+  </entry>
   
   <entry>
     <title>数字转中文</title>

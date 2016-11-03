@@ -6,29 +6,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="Tcztzy Blog">
-    <title>Hexo主题Tranquilpeak代码等宽字体问题研究 - Tcztzy Blog</title>
+    <title>归档: 2016/11 - Tcztzy Blog</title>
     <meta name="author" content="唐梓涯">
     
     
     
         <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
     
-    <meta name="description" content="Hexo是一个比较火的博客框架（主观），然后我使用了其中的Tranquilpeak主题，但是发现写着写着发现，本来应该等宽的代码部分明显不是等宽的，然后就翻文档
-
-Change global styleIf you want to change font families, font size, sidebar color, things like that, take a look at sou">
-<meta property="og:type" content="blog">
-<meta property="og:title" content="Hexo主题Tranquilpeak代码等宽字体问题研究">
-<meta property="og:url" content="https://tcztzy.github.io/2016/10/20/menlo-font-on-windows/index.html">
+    <meta property="og:type" content="blog">
+<meta property="og:title" content="Tcztzy Blog">
+<meta property="og:url" content="https://tcztzy.github.io/archives/2016/11/index.html">
 <meta property="og:site_name" content="Tcztzy Blog">
-<meta property="og:description" content="Hexo是一个比较火的博客框架（主观），然后我使用了其中的Tranquilpeak主题，但是发现写着写着发现，本来应该等宽的代码部分明显不是等宽的，然后就翻文档
-
-Change global styleIf you want to change font families, font size, sidebar color, things like that, take a look at sou">
-<meta property="og:updated_time" content="2016-10-19T21:16:36.141Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo主题Tranquilpeak代码等宽字体问题研究">
-<meta name="twitter:description" content="Hexo是一个比较火的博客框架（主观），然后我使用了其中的Tranquilpeak主题，但是发现写着写着发现，本来应该等宽的代码部分明显不是等宽的，然后就翻文档
-
-Change global styleIf you want to change font families, font size, sidebar color, things like that, take a look at sou">
+<meta name="twitter:title" content="Tcztzy Blog">
     
     
         
@@ -62,7 +52,7 @@ Change global styleIf you want to change font families, font size, sidebar color
             <!-- Define author's picture -->
 
 
-<header id="header" data-behavior="5">
+<header id="header" data-behavior="2">
     <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
     <div class="header-title">
         <a class="header-title-link" href="/ ">Tcztzy Blog</a>
@@ -86,7 +76,7 @@ Change global styleIf you want to change font families, font size, sidebar color
         
     
 
-<nav id="sidebar" data-behavior="5">
+<nav id="sidebar" data-behavior="2">
     <div class="sidebar-container">
         
             <div class="sidebar-profile">
@@ -216,24 +206,29 @@ Change global styleIf you want to change font families, font size, sidebar color
 </nav>
 
             
-            <div id="main" data-behavior="5"
+            <div id="main" data-behavior="2"
                  class="
                         hasCoverMetaIn
                         ">
                 
-<article class="post" itemscope itemType="http://schema.org/BlogPosting">
+    <section class="postShorten-group main-content-wrap">
     
     
-        <div class="post-header main-content-wrap text-left">
-    
-        <h1 class="post-title" itemprop="headline">
-            Hexo主题Tranquilpeak代码等宽字体问题研究
-        </h1>
-    
-    <div class="post-meta">
-    <time itemprop="datePublished" datetime="2016-10-20T03:43:12+08:00">
+    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title" itemprop="headline">
+                    
+                        <a class="link-unstyled" href="/2016/11/03/redis-password-contains-slashes/">
+                            当Redis的密码包含`/`
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time itemprop="datePublished" datetime="2016-11-03T16:49:23+08:00">
 	
-		    10月 20, 2016
+		    11月 03, 2016
     	
     </time>
     
@@ -245,109 +240,39 @@ Change global styleIf you want to change font families, font size, sidebar color
     
 </div>
 
-</div>
-    
-    <div class="post-content markdown" itemprop="articleBody">
-        <div class="main-content-wrap">
-            <p><a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>是一个比较火的博客框架（主观），然后我使用了其中的<a href="https://github.com/LouisBarranqueiro/hexo-theme-tranquilpeak" target="_blank" rel="external">Tranquilpeak</a>主题，但是发现写着写着发现，本来应该等宽的代码部分明显不是等宽的，然后就<a href="https://github.com/LouisBarranqueiro/hexo-theme-tranquilpeak/blob/master/docs/user.md#change-global-style" target="_blank" rel="external">翻文档</a></p>
-<blockquote>
-<h3 id="Change-global-style"><a href="#Change-global-style" class="headerlink" title="Change global style"></a>Change global style</h3><p>If you want to change font families, font size, sidebar color, things like that, take a look at <code>source/_css/utils/_variables.scss</code> file. This file contains global variables used in this theme. <strong>Build the theme after changes to see changes.</strong></p>
-</blockquote>
-<p>OK，接着<a href="https://github.com/LouisBarranqueiro/hexo-theme-tranquilpeak/blob/41cf0e78bdd2d65f0dd8213a6a7d12e732e6044f/source/_css/utils/_variables.scss#L16" target="_blank" rel="external">翻源码</a></p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">// Global settings</div><div class="line">// --------------------------------------------</div><div class="line"></div><div class="line">// Font families</div><div class="line">$open-sans:            'Open Sans';</div><div class="line">$open-sans-sans-serif: 'Open Sans', sans-serif;</div><div class="line">$merriweather-serif:   'Merriweather', serif;</div><div class="line">$menlo:                 Menlo;</div><div class="line"></div><div class="line">$font-family-base: $open-sans-sans-serif;</div><div class="line"></div><div class="line">$font-families: (</div><div class="line">   // base</div><div class="line">   'headings':          $open-sans-sans-serif,</div><div class="line">   // components</div><div class="line">   'code':              $menlo,</div><div class="line">   'caption':           $merriweather-serif,</div><div class="line">   'image-gallery':     $open-sans,</div><div class="line">   'post-header-cover': $merriweather-serif,</div><div class="line">   'post-meta':         $open-sans-sans-serif,</div><div class="line">   'post-content':      $merriweather-serif,</div><div class="line">   'post-excerpt-link': $open-sans-sans-serif,</div><div class="line">   'highlight':         $menlo,</div><div class="line">   // layout</div><div class="line">   'sidebar':           $open-sans-sans-serif</div><div class="line">);</div></pre></td></tr></table></figure>
-<p><a href="http://lmgtfy.com/?q=Menlo+font" target="_blank" rel="external">Menlo这个字体</a>是mono space的呀，怎么显示不对呢，然后我注意到<a href="https://zh.wikipedia.org/wiki/Menlo" target="_blank" rel="external">这么一段话</a>:</p>
-<blockquote>
-<p>Menlo是一个无衬线等宽字体，由Jim Lyles设计，首次出现于2009年8月上市的<strong>Mac OS X Snow Leopard系统内建字体之一</strong>。基于开源字体Bitstream Vera与自由版权字体DejaVu字体改良而来</p>
-</blockquote>
-<p>什么？Mac OS X内建字体？那也就是说本穷用的Windows 10 Home应该是不会有咯。然后本穷就<a href="https://github.com/hbin/top-programming-fonts/raw/master/Menlo-Regular.ttf" target="_blank" rel="external">下载</a>，安装，重启浏览器，OK，终于显示正确了。</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul>
-<li><p>Web开发不得不考虑跨平台的问题，所以一定不能在字体这个地方栽跟头，不能说你用的Mac开发的你就用Menlo不管了，好歹加个备选的monospace。</p>
-</li>
-<li><p>issue给作者之后发现，问题已经被fix，但是还得等下个版本release才能见到。这又教导我，在issue之前最好好好搜一下已有的issue和pull request，已经有的问题不要重复开issue。</p>
-</li>
-</ul>
+            </div>
+            
+                <div class="postShorten-content" itemprop="articleBody">
+                    <p>今天在把Azure Redis Cache集成到Django项目的时候发现一个奇怪的报错，<img src="http://oexlj9n6m.bkt.clouddn.com/Capture.PNG" alt="ValueError at /login/ invalid literal for int() with base 10: &#39;iAITMl7lD127c&#39;"></p>
+<p>检查一下我的settings.py是这么写的：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">CACHES = &#123;</div><div class="line">    <span class="string">"default"</span>: &#123;</div><div class="line">        <span class="string">"BACKEND"</span>: <span class="string">"django_redis.cache.RedisCache"</span>,</div><div class="line">        <span class="string">"LOCATION"</span>: <span class="string">"rediss://:iAITMl7lD127c/VZEl0OZl8qviaXHIoKekaJjP1J1HI=@#马赛克#:6380/0"</span>,</div><div class="line">        <span class="string">"OPTIONS"</span>: &#123;</div><div class="line">            <span class="string">"CLIENT_CLASS"</span>: <span class="string">"django_redis.client.DefaultClient"</span>,</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>然后发现报错信息中的<code>iAITMl7lD127c</code>正好就是<code>/</code>前面的内容，料想应该是解析URL的时候错把这个<code>/</code>当做分隔符了。一路TraceBack发现正是Python的标准库urlparse中抛出的错误，然后义正言辞地去找redis-py，结果发现人家<a href="https://github.com/andymccurdy/redis-py/pull/586" target="_blank" rel="external">已经修复了</a>，但是一年多了还没release到pypi上。我目前的解决方案是，刷一个不带<code>/</code>的密码。</p>
+<p><a href="https://github.com/niwinz/django-redis/issues/114" target="_blank" rel="external">https://github.com/niwinz/django-redis/issues/114</a><br><a href="https://github.com/andymccurdy/redis-py/issues/579" target="_blank" rel="external">https://github.com/andymccurdy/redis-py/issues/579</a></p>
 
+                    
+                        
+                    
+                    
+                        <p>
+                            <a href="/2016/11/03/redis-password-contains-slashes/#post-footer" class="postShorten-excerpt_link link">
+                                注释和共享
+                            </a>
+                        </p>
+                    
+                </div>
             
         </div>
-    </div>
-    <div id="post-footer" class="post-footer main-content-wrap">
         
-            <div class="post-footer-tags">
-                <span class="text-color-light text-small">标签</span><br/>
-                
-    <a class="tag tag--primary tag--small t-link" href="/tags/front-end-web-development/">前端</a>
-
-            </div>
+    </article>
+    
+    <div class="pagination-bar">
+    <ul class="pagination">
         
-        <div class="post-actions-wrap">
-    <nav>
-        <ul class="post-actions post-action-nav">
-            <li class="post-action">
-                
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/10/28/number-to-chinese/"  data-tooltip="数字转中文">
-                
-                    <i class="fa fa-angle-left"></i>
-                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
-                </a>
-            </li>
-            <li class="post-action">
-                
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/10/16/pep-7/" data-tooltip="PEP 7">
-                
-                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
-                    <i class="fa fa-angle-right"></i>
-                </a>
-            </li>
-        </ul>
-    </nav>
-    <ul class="post-actions post-action-share">
-        <li class="post-action hide-lg hide-md hide-sm">
-            <a class="post-action-btn btn btn--default btn-open-shareoptions"  href="#btn-open-shareoptions">
-                <i class="fa fa-share-alt"></i>
-            </a>
-        </li>
-        <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://tcztzy.github.io/2016/10/20/menlo-font-on-windows/">
-                <i class="fa fa-google-plus"></i>
-            </a>
-        </li>
-        <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://tcztzy.github.io/2016/10/20/menlo-font-on-windows/">
-                <i class="fa fa-facebook-official"></i>
-            </a>
-        </li>
-        <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://tcztzy.github.io/2016/10/20/menlo-font-on-windows/">
-                <i class="fa fa-twitter"></i>
-            </a>
-        </li>
         
-            <li class="post-action">
-                <a class="post-action-btn btn btn--default" href="#disqus_thread">
-                    <i class="fa fa-comment-o"></i>
-                </a>
-            </li>
-        
-        <li class="post-action">
-            
-                <a class="post-action-btn btn btn--default" href="#">
-            
-                <i class="fa fa-list"></i>
-            </a>
-        </li>
+        <li class="pagination-number">第 1 页 共 1 页</li>
     </ul>
 </div>
 
-
-        
-            
-                <div id="disqus_thread">
-    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-</div>
-            
-        
-    </div>
-</article>
+</section>
 
 
 
@@ -358,90 +283,6 @@ Change global styleIf you want to change font families, font size, sidebar color
 </footer>
 
             </div>
-            
-                <div id="bottom-bar" class="post-bottom-bar" data-behavior="5">
-                    <div class="post-actions-wrap">
-    <nav>
-        <ul class="post-actions post-action-nav">
-            <li class="post-action">
-                
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/10/28/number-to-chinese/"  data-tooltip="数字转中文">
-                
-                    <i class="fa fa-angle-left"></i>
-                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
-                </a>
-            </li>
-            <li class="post-action">
-                
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/10/16/pep-7/" data-tooltip="PEP 7">
-                
-                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
-                    <i class="fa fa-angle-right"></i>
-                </a>
-            </li>
-        </ul>
-    </nav>
-    <ul class="post-actions post-action-share">
-        <li class="post-action hide-lg hide-md hide-sm">
-            <a class="post-action-btn btn btn--default btn-open-shareoptions"  href="#btn-open-shareoptions">
-                <i class="fa fa-share-alt"></i>
-            </a>
-        </li>
-        <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://tcztzy.github.io/2016/10/20/menlo-font-on-windows/">
-                <i class="fa fa-google-plus"></i>
-            </a>
-        </li>
-        <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://tcztzy.github.io/2016/10/20/menlo-font-on-windows/">
-                <i class="fa fa-facebook-official"></i>
-            </a>
-        </li>
-        <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://tcztzy.github.io/2016/10/20/menlo-font-on-windows/">
-                <i class="fa fa-twitter"></i>
-            </a>
-        </li>
-        
-            <li class="post-action">
-                <a class="post-action-btn btn btn--default" href="#disqus_thread">
-                    <i class="fa fa-comment-o"></i>
-                </a>
-            </li>
-        
-        <li class="post-action">
-            
-                <a class="post-action-btn btn btn--default" href="#">
-            
-                <i class="fa fa-list"></i>
-            </a>
-        </li>
-    </ul>
-</div>
-
-
-                </div>
-                <div id="share-options-bar" class="share-options-bar" data-behavior="5">
-    <ul class="share-options">
-        <li class="share-option">
-            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=https://tcztzy.github.io/2016/10/20/menlo-font-on-windows/">
-                <i class="fa fa-google-plus"></i><span>分享到 Google+</span>
-            </a>
-        </li>
-        <li class="share-option">
-            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://tcztzy.github.io/2016/10/20/menlo-font-on-windows/">
-                <i class="fa fa-facebook-official"></i><span>分享到 Facebook</span>
-            </a>
-        </li>
-        <li class="share-option">
-            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=https://tcztzy.github.io/2016/10/20/menlo-font-on-windows/">
-                <i class="fa fa-twitter"></i><span>分享到 Twitter</span>
-            </a>
-        </li>
-    </ul>
-</div>
-<div id="share-options-mask" class="share-options-mask"></div>
-
             
         </div>
         
@@ -632,25 +473,6 @@ Change global styleIf you want to change font families, font size, sidebar color
         <!--SCRIPTS-->
 <script src="/assets/js/script-aefdxebvplc4ftfj4r0flyrd6szwoqme4warbwhkeovj1fw0fyshidtnund1.min.js"></script>
 <!--SCRIPTS END-->
-
-    
-        <script>
-             var disqus_config = function () {
-                 this.page.url = 'https://tcztzy.github.io/2016/10/20/menlo-font-on-windows/';
-                 
-                    this.page.identifier = '2016/10/20/menlo-font-on-windows/';
-                 
-             };
-            (function() {
-                var d = document, s = d.createElement('script');
-                var disqus_shortname = 'tcztzy';
-                s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-
-                s.setAttribute('data-timestamp', +new Date());
-                (d.head || d.body).appendChild(s);
-            })();
-        </script>
-    
 
 
 
