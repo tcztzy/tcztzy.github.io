@@ -6,29 +6,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="Tcztzy Blog">
-    <title>Hexo主题Tranquilpeak代码等宽字体问题研究 - Tcztzy Blog</title>
+    <title>Python导入系统 - Tcztzy Blog</title>
     <meta name="author" content="唐梓涯">
     
     
     
         <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
     
-    <meta name="description" content="Hexo是一个比较火的博客框架（主观），然后我使用了其中的Tranquilpeak主题，但是发现写着写着发现，本来应该等宽的代码部分明显不是等宽的，然后就翻文档
-
-Change global styleIf you want to change font families, font size, sidebar color, things like that, take a look at sou">
+    <meta name="description" content="本人翻译，转载请注明出处
+导入系统一个模块中的Python代码通过导入的过程可以访问另一个模块的代码。import语句是调用导入机制的最常见的方式，但不是唯一的方式。例如importlib.import_module()和内建函数__import__()也可以用来调用导入机制。
+import语句结合了两个操作；搜索命名的模块，然后在本地作用域把搜索的结果和名字绑定。import语句的搜索的操作被定">
 <meta property="og:type" content="blog">
-<meta property="og:title" content="Hexo主题Tranquilpeak代码等宽字体问题研究">
-<meta property="og:url" content="https://tcztzy.github.io/2016/10/20/menlo-font-on-windows/index.html">
+<meta property="og:title" content="Python导入系统">
+<meta property="og:url" content="https://tcztzy.github.io/2016/11/09/python-import-system/index.html">
 <meta property="og:site_name" content="Tcztzy Blog">
-<meta property="og:description" content="Hexo是一个比较火的博客框架（主观），然后我使用了其中的Tranquilpeak主题，但是发现写着写着发现，本来应该等宽的代码部分明显不是等宽的，然后就翻文档
-
-Change global styleIf you want to change font families, font size, sidebar color, things like that, take a look at sou">
-<meta property="og:updated_time" content="2016-10-19T21:16:36.141Z">
+<meta property="og:description" content="本人翻译，转载请注明出处
+导入系统一个模块中的Python代码通过导入的过程可以访问另一个模块的代码。import语句是调用导入机制的最常见的方式，但不是唯一的方式。例如importlib.import_module()和内建函数__import__()也可以用来调用导入机制。
+import语句结合了两个操作；搜索命名的模块，然后在本地作用域把搜索的结果和名字绑定。import语句的搜索的操作被定">
+<meta property="og:updated_time" content="2016-11-10T07:05:04.518Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo主题Tranquilpeak代码等宽字体问题研究">
-<meta name="twitter:description" content="Hexo是一个比较火的博客框架（主观），然后我使用了其中的Tranquilpeak主题，但是发现写着写着发现，本来应该等宽的代码部分明显不是等宽的，然后就翻文档
-
-Change global styleIf you want to change font families, font size, sidebar color, things like that, take a look at sou">
+<meta name="twitter:title" content="Python导入系统">
+<meta name="twitter:description" content="本人翻译，转载请注明出处
+导入系统一个模块中的Python代码通过导入的过程可以访问另一个模块的代码。import语句是调用导入机制的最常见的方式，但不是唯一的方式。例如importlib.import_module()和内建函数__import__()也可以用来调用导入机制。
+import语句结合了两个操作；搜索命名的模块，然后在本地作用域把搜索的结果和名字绑定。import语句的搜索的操作被定">
     
     
         
@@ -227,13 +227,13 @@ Change global styleIf you want to change font families, font size, sidebar color
         <div class="post-header main-content-wrap text-left">
     
         <h1 class="post-title" itemprop="headline">
-            Hexo主题Tranquilpeak代码等宽字体问题研究
+            Python导入系统
         </h1>
     
     <div class="post-meta">
-    <time itemprop="datePublished" datetime="2016-10-20T03:43:12+08:00">
+    <time itemprop="datePublished" datetime="2016-11-09T19:33:43+08:00">
 	
-		    10月 20, 2016
+		    11月 09, 2016
     	
     </time>
     
@@ -249,23 +249,14 @@ Change global styleIf you want to change font families, font size, sidebar color
     
     <div class="post-content markdown" itemprop="articleBody">
         <div class="main-content-wrap">
-            <p><a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>是一个比较火的博客框架（主观），然后我使用了其中的<a href="https://github.com/LouisBarranqueiro/hexo-theme-tranquilpeak" target="_blank" rel="external">Tranquilpeak</a>主题，但是发现写着写着发现，本来应该等宽的代码部分明显不是等宽的，然后就<a href="https://github.com/LouisBarranqueiro/hexo-theme-tranquilpeak/blob/master/docs/user.md#change-global-style" target="_blank" rel="external">翻文档</a></p>
-<blockquote>
-<h3 id="Change-global-style"><a href="#Change-global-style" class="headerlink" title="Change global style"></a>Change global style</h3><p>If you want to change font families, font size, sidebar color, things like that, take a look at <code>source/_css/utils/_variables.scss</code> file. This file contains global variables used in this theme. <strong>Build the theme after changes to see changes.</strong></p>
-</blockquote>
-<p>OK，接着<a href="https://github.com/LouisBarranqueiro/hexo-theme-tranquilpeak/blob/41cf0e78bdd2d65f0dd8213a6a7d12e732e6044f/source/_css/utils/_variables.scss#L16" target="_blank" rel="external">翻源码</a></p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">// Global settings</div><div class="line">// --------------------------------------------</div><div class="line"></div><div class="line">// Font families</div><div class="line">$open-sans:            'Open Sans';</div><div class="line">$open-sans-sans-serif: 'Open Sans', sans-serif;</div><div class="line">$merriweather-serif:   'Merriweather', serif;</div><div class="line">$menlo:                 Menlo;</div><div class="line"></div><div class="line">$font-family-base: $open-sans-sans-serif;</div><div class="line"></div><div class="line">$font-families: (</div><div class="line">   // base</div><div class="line">   'headings':          $open-sans-sans-serif,</div><div class="line">   // components</div><div class="line">   'code':              $menlo,</div><div class="line">   'caption':           $merriweather-serif,</div><div class="line">   'image-gallery':     $open-sans,</div><div class="line">   'post-header-cover': $merriweather-serif,</div><div class="line">   'post-meta':         $open-sans-sans-serif,</div><div class="line">   'post-content':      $merriweather-serif,</div><div class="line">   'post-excerpt-link': $open-sans-sans-serif,</div><div class="line">   'highlight':         $menlo,</div><div class="line">   // layout</div><div class="line">   'sidebar':           $open-sans-sans-serif</div><div class="line">);</div></pre></td></tr></table></figure>
-<p><a href="http://lmgtfy.com/?q=Menlo+font" target="_blank" rel="external">Menlo这个字体</a>是mono space的呀，怎么显示不对呢，然后我注意到<a href="https://zh.wikipedia.org/wiki/Menlo" target="_blank" rel="external">这么一段话</a>:</p>
-<blockquote>
-<p>Menlo是一个无衬线等宽字体，由Jim Lyles设计，首次出现于2009年8月上市的<strong>Mac OS X Snow Leopard系统内建字体之一</strong>。基于开源字体Bitstream Vera与自由版权字体DejaVu字体改良而来</p>
-</blockquote>
-<p>什么？Mac OS X内建字体？那也就是说本穷用的Windows 10 Home应该是不会有咯。然后本穷就<a href="https://github.com/hbin/top-programming-fonts/raw/master/Menlo-Regular.ttf" target="_blank" rel="external">下载</a>，安装，重启浏览器，OK，终于显示正确了。</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul>
-<li><p>Web开发不得不考虑跨平台的问题，所以一定不能在字体这个地方栽跟头，不能说你用的Mac开发的你就用Menlo不管了，好歹加个备选的monospace。</p>
-</li>
-<li><p>issue给作者之后发现，问题已经被fix，但是还得等下个版本release才能见到。这又教导我，在issue之前最好好好搜一下已有的issue和pull request，已经有的问题不要重复开issue。</p>
-</li>
-</ul>
+            <p>本人翻译，转载请注明出处</p>
+<h1 id="导入系统"><a href="#导入系统" class="headerlink" title="导入系统"></a>导入系统</h1><p>一个<a href="https://docs.python.org/3/glossary.html#term-module" target="_blank" rel="external">模块</a>中的Python代码通过<a href="https://docs.python.org/3/glossary.html#term-importing" target="_blank" rel="external">导入</a>的过程可以访问另一个模块的代码。<a href="https://docs.python.org/3/reference/simple_stmts.html#import" target="_blank" rel="external"><code>import</code></a>语句是调用导入机制的最常见的方式，但不是唯一的方式。例如<a href="https://docs.python.org/3/library/importlib.html#importlib.import_module" target="_blank" rel="external"><code>importlib.import_module()</code></a>和内建函数<a href="https://docs.python.org/3/library/functions.html#__import__" target="_blank" rel="external"><code>__import__()</code></a>也可以用来调用导入机制。</p>
+<p><a href="https://docs.python.org/3/reference/simple_stmts.html#import" target="_blank" rel="external"><code>import</code></a>语句结合了两个操作；搜索命名的模块，然后在本地作用域把搜索的结果和名字绑定。<a href="https://docs.python.org/3/reference/simple_stmts.html#import" target="_blank" rel="external"><code>import</code></a>语句的搜索的操作被定义为一次<a href="https://docs.python.org/3/library/functions.html#__import__" target="_blank" rel="external"><code>__import__()</code></a>函数的调用，传入一些合适的参数。<a href="https://docs.python.org/3/library/functions.html#__import__" target="_blank" rel="external"><code>__import__()</code></a>的返回值被用来执行<a href="https://docs.python.org/3/reference/simple_stmts.html#import" target="_blank" rel="external"><code>import</code></a>语句的命名绑定的操作。命名绑定的确切的细节参见<a href="https://docs.python.org/3/reference/simple_stmts.html#import" target="_blank" rel="external"><code>import</code></a>语句。</p>
+<p><a href="https://docs.python.org/3/library/functions.html#__import__" target="_blank" rel="external"><code>__import__()</code></a>的直接调用仅执行模块的搜索，如果有结果，还有模块的创建操作。当（ 执行<code>__import__()</code>函数时）某些副作用可能会发生，例如导入父模块，还有更新很多缓存（包括<a href="https://docs.python.org/3/library/sys.html#sys.modules" target="_blank" rel="external"><code>sys.modules</code></a>），只有<a href="https://docs.python.org/3/reference/simple_stmts.html#import" target="_blank" rel="external"><code>import</code></a>语句执行命名绑定操作。</p>
+<p>当<a href="https://docs.python.org/3/library/functions.html#__import__" target="_blank" rel="external"><code>__import__()</code></a>作为导入语句被调用的时候，是标准内建函数<a href="https://docs.python.org/3/library/functions.html#__import__" target="_blank" rel="external"><code>__import__()</code></a>被调用。其他调用导入系统的机制（例如<a href="https://docs.python.org/3/library/importlib.html#importlib.import_module" target="_blank" rel="external"><code>importlib.import_module()</code></a>）可能选择推翻<a href="https://docs.python.org/3/library/functions.html#__import__" target="_blank" rel="external"><code>__import__()</code></a>而使用自己的导入语义学实现。</p>
+<p>当一个模块第一次被导入的时候，Python搜索这个模块，如果发现，它就会创建一个模块对象<span id="id1"><a href="#fnmo">[1]</a></span>，初始化之。如果命名模块无法被找到，将会触发一个<a href="https://docs.python.org/3/library/exceptions.html#ImportError" target="_blank" rel="external"><code>ImportError</code></a>。Python实现了多种策略当导入机器被调用时搜索命名模块。这些策略可以被多种下文描述的钩子修改和拓展。</p>
+<p><em>在版本3.3中的改变：</em> 导入系统更新完全实现了<a href="https://www.python.org/dev/peps/pep-0302" target="_blank" rel="external">PEP 302</a>的第二阶段。</p>
+<h3 id="脚注"><a href="#脚注" class="headerlink" title="脚注"></a>脚注</h3><p><span id="fnmo"><a href="#id1">[1]</a> 参见<a href="https://docs.python.org/3/library/types.html#types.ModuleType" target="_blank" rel="external"><code>types.ModuleType</code></a></span></p>
 
             
         </div>
@@ -275,7 +266,7 @@ Change global styleIf you want to change font families, font size, sidebar color
             <div class="post-footer-tags">
                 <span class="text-color-light text-small">标签</span><br/>
                 
-    <a class="tag tag--primary tag--small t-link" href="/tags/front-end-web-development/">前端</a>
+    <a class="tag tag--primary tag--small t-link" href="/tags/Python/">Python</a>
 
             </div>
         
@@ -284,7 +275,7 @@ Change global styleIf you want to change font families, font size, sidebar color
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/10/28/number-to-chinese/"  data-tooltip="数字转中文">
+                    <a class="post-action-btn btn btn--disabled">
                 
                     <i class="fa fa-angle-left"></i>
                     <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
@@ -292,7 +283,7 @@ Change global styleIf you want to change font families, font size, sidebar color
             </li>
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/10/16/pep-7/" data-tooltip="PEP 7">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/11/03/redis-password-contains-slashes/" data-tooltip="当Redis的密码包含`/`">
                 
                     <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
                     <i class="fa fa-angle-right"></i>
@@ -307,17 +298,17 @@ Change global styleIf you want to change font families, font size, sidebar color
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://tcztzy.github.io/2016/10/20/menlo-font-on-windows/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://tcztzy.github.io/2016/11/09/python-import-system/">
                 <i class="fa fa-google-plus"></i>
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://tcztzy.github.io/2016/10/20/menlo-font-on-windows/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://tcztzy.github.io/2016/11/09/python-import-system/">
                 <i class="fa fa-facebook-official"></i>
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://tcztzy.github.io/2016/10/20/menlo-font-on-windows/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://tcztzy.github.io/2016/11/09/python-import-system/">
                 <i class="fa fa-twitter"></i>
             </a>
         </li>
@@ -365,7 +356,7 @@ Change global styleIf you want to change font families, font size, sidebar color
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/10/28/number-to-chinese/"  data-tooltip="数字转中文">
+                    <a class="post-action-btn btn btn--disabled">
                 
                     <i class="fa fa-angle-left"></i>
                     <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
@@ -373,7 +364,7 @@ Change global styleIf you want to change font families, font size, sidebar color
             </li>
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/10/16/pep-7/" data-tooltip="PEP 7">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/11/03/redis-password-contains-slashes/" data-tooltip="当Redis的密码包含`/`">
                 
                     <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
                     <i class="fa fa-angle-right"></i>
@@ -388,17 +379,17 @@ Change global styleIf you want to change font families, font size, sidebar color
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://tcztzy.github.io/2016/10/20/menlo-font-on-windows/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://tcztzy.github.io/2016/11/09/python-import-system/">
                 <i class="fa fa-google-plus"></i>
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://tcztzy.github.io/2016/10/20/menlo-font-on-windows/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://tcztzy.github.io/2016/11/09/python-import-system/">
                 <i class="fa fa-facebook-official"></i>
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://tcztzy.github.io/2016/10/20/menlo-font-on-windows/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://tcztzy.github.io/2016/11/09/python-import-system/">
                 <i class="fa fa-twitter"></i>
             </a>
         </li>
@@ -424,17 +415,17 @@ Change global styleIf you want to change font families, font size, sidebar color
                 <div id="share-options-bar" class="share-options-bar" data-behavior="5">
     <ul class="share-options">
         <li class="share-option">
-            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=https://tcztzy.github.io/2016/10/20/menlo-font-on-windows/">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=https://tcztzy.github.io/2016/11/09/python-import-system/">
                 <i class="fa fa-google-plus"></i><span>分享到 Google+</span>
             </a>
         </li>
         <li class="share-option">
-            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://tcztzy.github.io/2016/10/20/menlo-font-on-windows/">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://tcztzy.github.io/2016/11/09/python-import-system/">
                 <i class="fa fa-facebook-official"></i><span>分享到 Facebook</span>
             </a>
         </li>
         <li class="share-option">
-            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=https://tcztzy.github.io/2016/10/20/menlo-font-on-windows/">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=https://tcztzy.github.io/2016/11/09/python-import-system/">
                 <i class="fa fa-twitter"></i><span>分享到 Twitter</span>
             </a>
         </li>
@@ -655,9 +646,9 @@ Change global styleIf you want to change font families, font size, sidebar color
     
         <script>
              var disqus_config = function () {
-                 this.page.url = 'https://tcztzy.github.io/2016/10/20/menlo-font-on-windows/';
+                 this.page.url = 'https://tcztzy.github.io/2016/11/09/python-import-system/';
                  
-                    this.page.identifier = '2016/10/20/menlo-font-on-windows/';
+                    this.page.identifier = '2016/11/09/python-import-system/';
                  
              };
             (function() {

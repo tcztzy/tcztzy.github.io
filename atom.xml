@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://tcztzy.github.io/"/>
-  <updated>2016-11-03T13:17:17.651Z</updated>
+  <updated>2016-11-10T07:05:04.518Z</updated>
   <id>https://tcztzy.github.io/</id>
   
   <author>
@@ -14,6 +14,37 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Python导入系统</title>
+    <link href="https://tcztzy.github.io/2016/11/09/python-import-system/"/>
+    <id>https://tcztzy.github.io/2016/11/09/python-import-system/</id>
+    <published>2016-11-09T11:33:43.000Z</published>
+    <updated>2016-11-10T07:05:04.518Z</updated>
+    
+    <content type="html"><![CDATA[<p>本人翻译，转载请注明出处</p>
+<h1 id="导入系统"><a href="#导入系统" class="headerlink" title="导入系统"></a>导入系统</h1><p>一个<a href="https://docs.python.org/3/glossary.html#term-module" target="_blank" rel="external">模块</a>中的Python代码通过<a href="https://docs.python.org/3/glossary.html#term-importing" target="_blank" rel="external">导入</a>的过程可以访问另一个模块的代码。<a href="https://docs.python.org/3/reference/simple_stmts.html#import" target="_blank" rel="external"><code>import</code></a>语句是调用导入机制的最常见的方式，但不是唯一的方式。例如<a href="https://docs.python.org/3/library/importlib.html#importlib.import_module" target="_blank" rel="external"><code>importlib.import_module()</code></a>和内建函数<a href="https://docs.python.org/3/library/functions.html#__import__" target="_blank" rel="external"><code>__import__()</code></a>也可以用来调用导入机制。</p>
+<p><a href="https://docs.python.org/3/reference/simple_stmts.html#import" target="_blank" rel="external"><code>import</code></a>语句结合了两个操作；搜索命名的模块，然后在本地作用域把搜索的结果和名字绑定。<a href="https://docs.python.org/3/reference/simple_stmts.html#import" target="_blank" rel="external"><code>import</code></a>语句的搜索的操作被定义为一次<a href="https://docs.python.org/3/library/functions.html#__import__" target="_blank" rel="external"><code>__import__()</code></a>函数的调用，传入一些合适的参数。<a href="https://docs.python.org/3/library/functions.html#__import__" target="_blank" rel="external"><code>__import__()</code></a>的返回值被用来执行<a href="https://docs.python.org/3/reference/simple_stmts.html#import" target="_blank" rel="external"><code>import</code></a>语句的命名绑定的操作。命名绑定的确切的细节参见<a href="https://docs.python.org/3/reference/simple_stmts.html#import" target="_blank" rel="external"><code>import</code></a>语句。</p>
+<p><a href="https://docs.python.org/3/library/functions.html#__import__" target="_blank" rel="external"><code>__import__()</code></a>的直接调用仅执行模块的搜索，如果有结果，还有模块的创建操作。当（ 执行<code>__import__()</code>函数时）某些副作用可能会发生，例如导入父模块，还有更新很多缓存（包括<a href="https://docs.python.org/3/library/sys.html#sys.modules" target="_blank" rel="external"><code>sys.modules</code></a>），只有<a href="https://docs.python.org/3/reference/simple_stmts.html#import" target="_blank" rel="external"><code>import</code></a>语句执行命名绑定操作。</p>
+<p>当<a href="https://docs.python.org/3/library/functions.html#__import__" target="_blank" rel="external"><code>__import__()</code></a>作为导入语句被调用的时候，是标准内建函数<a href="https://docs.python.org/3/library/functions.html#__import__" target="_blank" rel="external"><code>__import__()</code></a>被调用。其他调用导入系统的机制（例如<a href="https://docs.python.org/3/library/importlib.html#importlib.import_module" target="_blank" rel="external"><code>importlib.import_module()</code></a>）可能选择推翻<a href="https://docs.python.org/3/library/functions.html#__import__" target="_blank" rel="external"><code>__import__()</code></a>而使用自己的导入语义学实现。</p>
+<p>当一个模块第一次被导入的时候，Python搜索这个模块，如果发现，它就会创建一个模块对象<span id="id1"><a href="#fnmo">[1]</a></span>，初始化之。如果命名模块无法被找到，将会触发一个<a href="https://docs.python.org/3/library/exceptions.html#ImportError" target="_blank" rel="external"><code>ImportError</code></a>。Python实现了多种策略当导入机器被调用时搜索命名模块。这些策略可以被多种下文描述的钩子修改和拓展。</p>
+<p><em>在版本3.3中的改变：</em> 导入系统更新完全实现了<a href="https://www.python.org/dev/peps/pep-0302" target="_blank" rel="external">PEP 302</a>的第二阶段。</p>
+<h3 id="脚注"><a href="#脚注" class="headerlink" title="脚注"></a>脚注</h3><p><span id="fnmo"><a href="#id1">[1]</a> 参见<a href="https://docs.python.org/3/library/types.html#types.ModuleType" target="_blank" rel="external"><code>types.ModuleType</code></a></span></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;本人翻译，转载请注明出处&lt;/p&gt;
+&lt;h1 id=&quot;导入系统&quot;&gt;&lt;a href=&quot;#导入系统&quot; class=&quot;headerlink&quot; title=&quot;导入系统&quot;&gt;&lt;/a&gt;导入系统&lt;/h1&gt;&lt;p&gt;一个&lt;a href=&quot;https://docs.python.org/3/gloss
+    
+    </summary>
+    
+      <category term="编程" scheme="https://tcztzy.github.io/categories/programming/"/>
+    
+    
+      <category term="Python" scheme="https://tcztzy.github.io/tags/Python/"/>
+    
+  </entry>
   
   <entry>
     <title>当Redis的密码包含`/`</title>
